@@ -1,10 +1,10 @@
 {
-	"name": "templates",
+	"name": "saapshot",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/liyasthomas/templates.git"
+		"url": "https://github.com/liyasthomas/saapshot.git"
 	},
-	"description": "My collection of reusable templates and assets by Liyas Thomas",
+	"description": "Camera app by Liyas Thomas",
 	"author": "@liyasthomas",
 	"version": "1.0.0",
 	"devDependencies": {

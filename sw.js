@@ -40,10 +40,10 @@ workbox.routing.registerRoute(
 );
 
 workbox.precaching.precacheAndRoute([
-    '/lvr/assets/css/style.min.css',
-    '/lvr/assets/js/script.min.js',
+    '/saapshot/assets/css/style.min.css',
+    '/saapshot/assets/js/script.min.js',
 	{
-		url: '/lvr/index.html',
+		url: '/saapshot/index.html',
 		revision: '383676'
 	},
 ]);
