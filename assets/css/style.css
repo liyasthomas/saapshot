@@ -277,19 +277,7 @@ table td {
 	}
 }
 
-.container {
-	max-width: 1000px;
-	margin: 50px auto;
-	padding: 20px;
-	background-color: #efefef;
-}
-
-.app {
-	width: 100%;
-	position: relative;
-}
-
-.app #start-camera {
+#start-camera {
 	display: none;
 	border-radius: 3px;
 	max-width: 400px;
@@ -302,12 +290,12 @@ table td {
 	text-align: center;
 }
 
-.app video#camera-stream {
+video#camera-stream {
 	display: none;
 	width: 100%;
 }
 
-.app img#snap {
+img#snap {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -316,7 +304,7 @@ table td {
 	display: none;
 }
 
-.app #error-message {
+#error-message {
 	width: 100%;
 	background-color: #ccc;
 	color: #9b9b9b;
@@ -326,7 +314,7 @@ table td {
 	display: none;
 }
 
-.app .controls {
+.controls {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -341,7 +329,7 @@ table td {
 	display: none;
 }
 
-.app .controls a {
+.controls a {
 	border-radius: 50%;
 	color: #fff;
 	background-color: #111;
@@ -353,40 +341,40 @@ table td {
 	-webkit-tap-highlight-color: transparent;
 }
 
-.app .controls a:hover {
+.controls a:hover {
 	opacity: 1;
 }
 
-.app .controls a.disabled {
+.controls a.disabled {
 	background-color: #555;
 	opacity: 0.5;
 	cursor: default;
 	pointer-events: none;
 }
 
-.app .controls a.disabled:hover {
+.controls a.disabled:hover {
 	opacity: 0.5;
 }
 
-.app .controls a i {
+.controls a i {
 	font-size: 18px;
 }
 
-.app .controls #take-photo i {
+.controls #take-photo i {
 	font-size: 32px;
 }
 
-.app canvas {
+canvas {
 	display: none;
 }
 
-.app video#camera-stream.visible,
-.app img#snap.visible,
-.app #error-message.visible {
+video#camera-stream.visible,
+img#snap.visible,
+#error-message.visible {
 	display: block;
 }
 
-.app .controls.visible {
+.controls.visible {
 	display: flex;
 }
 
@@ -395,15 +383,15 @@ table td {
 		margin: 40px;
 	}
 
-	.app #start-camera.visible {
+	#start-camera.visible {
 		display: block;
 	}
 
-	.app .controls a i {
+	.controls a i {
 		font-size: 16px;
 	}
 
-	.app .controls #take-photo i {
+	.controls #take-photo i {
 		font-size: 24px;
 	}
 }
@@ -413,16 +401,16 @@ table td {
 		margin: 10px;
 	}
 
-	.app #error-message {
+	#error-message {
 		padding: 80px 50px;
 		font-size: 18px;
 	}
 
-	.app .controls a i {
+	.controls a i {
 		font-size: 12px;
 	}
 
-	.app .controls #take-photo i {
+	.controls #take-photo i {
 		font-size: 18px;
 	}
 }
