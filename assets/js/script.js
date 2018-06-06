@@ -1,7 +1,6 @@
 // References to all the element we will need.
 var video = document.querySelector('#camera-stream'),
 	image = document.querySelector('#snap'),
-	start_camera = document.querySelector('#start-camera'),
 	controls = document.querySelector('.controls'),
 	take_photo_btn = document.querySelector('#take-photo'),
 	delete_photo_btn = document.querySelector('#delete-photo'),
@@ -44,18 +43,6 @@ if (!navigator.getMedia) {
 	);
 
 }
-
-// Mobile browsers cannot play video without user input,
-// so here we're using a button to start it manually.
-start_camera.addEventListener("click", function (e) {
-
-	e.preventDefault();
-
-	// Start video playback manually.
-	video.play();
-	showVideo();
-
-});
 
 take_photo_btn.addEventListener("click", function (e) {
 
@@ -143,7 +130,6 @@ function hideUI() {
 	// Helper function for clearing the app UI.
 
 	controls.classList.remove("visible");
-	start_camera.classList.remove("visible");
 	video.classList.remove("visible");
 	snap.classList.remove("visible");
 	error_message.classList.remove("visible");
