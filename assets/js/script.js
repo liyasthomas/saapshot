@@ -1,11 +1,12 @@
 // References to all the element we will need.
-var video = document.querySelector('#camera-stream'),
-	image = document.querySelector('#snap'),
-	controls = document.querySelector('.controls'),
-	take_photo_btn = document.querySelector('#take-photo'),
-	delete_photo_btn = document.querySelector('#delete-photo'),
-	download_photo_btn = document.querySelector('#download-photo'),
-	error_message = document.querySelector('#error-message');
+const video = document.querySelector('#camera-stream');
+
+const image = document.querySelector('#snap');
+const controls = document.querySelector('.controls');
+const take_photo_btn = document.querySelector('#take-photo');
+const delete_photo_btn = document.querySelector('#delete-photo');
+const download_photo_btn = document.querySelector('#download-photo');
+const error_message = document.querySelector('#error-message');
 
 // The getUserMedia interface is used for handling camera input.
 // Some browsers need a prefix so here we're covering all the options
@@ -23,7 +24,7 @@ if (!navigator.getMedia) {
 			video: true
 		},
 		// Success Callback
-		function (stream) {
+		stream => {
 
 			// Create an object URL for the video stream and
 			// set it as src of our HTLM video element.
@@ -31,24 +32,24 @@ if (!navigator.getMedia) {
 
 			// Play the video element to start the stream.
 			video.play();
-			video.onplay = function () {
+			video.onplay = () => {
 				showVideo();
 			};
 
 		},
 		// Error Callback
-		function (err) {
-			displayErrorMessage("There was an error with accessing the camera stream: " + err.name, err);
+		err => {
+			displayErrorMessage(`There was an error with accessing the camera stream: ${err.name}`, err);
 		}
 	);
 
 }
 
-take_photo_btn.addEventListener("click", function (e) {
+take_photo_btn.addEventListener("click", e => {
 
 	e.preventDefault();
 
-	var snap = takeSnapshot();
+	const snap = takeSnapshot();
 
 	// Show image. 
 	image.setAttribute('src', snap);
@@ -66,7 +67,7 @@ take_photo_btn.addEventListener("click", function (e) {
 
 });
 
-delete_photo_btn.addEventListener("click", function (e) {
+delete_photo_btn.addEventListener("click", e => {
 
 	e.preventDefault();
 
@@ -92,15 +93,15 @@ function showVideo() {
 }
 
 function takeSnapshot() {
-	// Here we're using a trick that involves a hidden canvas element.  
+    // Here we're using a trick that involves a hidden canvas element.  
 
-	var hidden_canvas = document.querySelector('canvas'),
-		context = hidden_canvas.getContext('2d');
+    const hidden_canvas = document.querySelector('canvas');
 
-	var width = video.videoWidth,
-		height = video.videoHeight;
+    const context = hidden_canvas.getContext('2d');
+    const width = video.videoWidth;
+    const height = video.videoHeight;
 
-	if (width && height) {
+    if (width && height) {
 
 		// Setup a canvas with the same dimensions as the video.
 		hidden_canvas.width = width;
@@ -114,16 +115,15 @@ function takeSnapshot() {
 	}
 }
 
-function displayErrorMessage(error_msg, error) {
-	error = error || "";
-	if (error) {
+function displayErrorMessage(error_msg, error = "") {
+    if (error) {
 		console.log(error);
 	}
 
-	error_message.innerText = error_msg;
+    error_message.innerText = error_msg;
 
-	hideUI();
-	error_message.classList.add("visible");
+    hideUI();
+    error_message.classList.add("visible");
 }
 
 function hideUI() {
@@ -136,21 +136,21 @@ function hideUI() {
 }
 
 //Generate and Download Screenshot of webpage without lossing the styles https://stackoverflow.com/a/44495166
-(function (exports) {
+(exports => {
 	function urlsToAbsolute(nodeList) {
 		if (!nodeList.length) {
 			return [];
 		}
-		var attrName = "href";
+		let attrName = "href";
 		if (nodeList[0].__proto__ === HTMLImageElement.prototype || nodeList[0].__proto__ === HTMLScriptElement.prototype) {
 			attrName = "src";
 		}
-		nodeList = [].map.call(nodeList, function (el, i) {
-			var attr = el.getAttribute(attrName);
+		nodeList = [].map.call(nodeList, (el, i) => {
+			const attr = el.getAttribute(attrName);
 			if (!attr) {
 				return;
 			}
-			var absURL = /^(https?|data):/i.test(attr);
+			const absURL = /^(https?|data):/i.test(attr);
 			if (absURL) {
 				return el;
 			} else {
@@ -161,10 +161,10 @@ function hideUI() {
 	}
 
 	function screenshotPage() {
-		var wrapper = document.getElementById("capture");
+		const wrapper = document.getElementById("capture");
 		html2canvas(wrapper, {
-			onrendered: function (canvas) {
-				canvas.toBlob(function (blob) {
+			onrendered(canvas) {
+				canvas.toBlob(blob => {
 					saveAs(blob, "Saap.png");
 				});
 			}
@@ -172,9 +172,9 @@ function hideUI() {
 	}
 
 	function addOnPageLoad_() {
-		window.addEventListener("DOMContentLoaded", function (e) {
-			var scrollX = document.documentElement.dataset.scrollX || 0;
-			var scrollY = document.documentElement.dataset.scrollY || 0;
+		window.addEventListener("DOMContentLoaded", e => {
+			const scrollX = document.documentElement.dataset.scrollX || 0;
+			const scrollY = document.documentElement.dataset.scrollY || 0;
 			window.scrollTo(scrollX, scrollY);
 		});
 	}
@@ -232,130 +232,130 @@ function hideUI() {
 
 //Toggle more
 function toggleMore() {
-	var e = document.getElementById("more");
+	const e = document.getElementById("more");
 	e.classList.toggle("closed");
 }
 
 //Toggle brightness
 function toggleBrightness() {
-	var e = document.getElementById("bslider");
+	const e = document.getElementById("bslider");
 	e.classList.toggle("closed");
 }
 
 //Toggle saturate
 function toggleSaturate() {
-	var e = document.getElementById("sslider");
+	const e = document.getElementById("sslider");
 	e.classList.toggle("closed");
 }
 
 //Toggle contrast
 function toggleContrast() {
-	var e = document.getElementById("cslider");
+	const e = document.getElementById("cslider");
 	e.classList.toggle("closed");
 }
 
 //Toggle opacity
 function toggleOpacity() {
-	var e = document.getElementById("oslider");
+	const e = document.getElementById("oslider");
 	e.classList.toggle("closed");
 }
 
 //Toggle scale
 function toggleScale() {
-	var e = document.getElementById("zslider");
+	const e = document.getElementById("zslider");
 	e.classList.toggle("closed");
 }
 
-var p = document.getElementById("capture"),
-	bRange = document.getElementById("b"),
-	sRange = document.getElementById("s"),
-	cRange = document.getElementById("c"),
-	oRange = document.getElementById("o"),
-	zRange = document.getElementById("z");
+const p = document.getElementById("capture");
+const bRange = document.getElementById("b");
+const sRange = document.getElementById("s");
+const cRange = document.getElementById("c");
+const oRange = document.getElementById("o");
+const zRange = document.getElementById("z");
 
 bRange.addEventListener("input", function () {
-	var sat = sRange.value,
-		con = cRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(" + this.value + "%) saturate(" + sat + "%) contrast(" + con + "%) opacity(" + opa + "%)";
-	document.getElementById("bPointSize").value = this.value + "٪";
+    const sat = sRange.value;
+    const con = cRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(${this.value}%) saturate(${sat}%) contrast(${con}%) opacity(${opa}%)`;
+    document.getElementById("bPointSize").value = `${this.value}٪`;
 }, false);
 
 sRange.addEventListener("input", function () {
-	var bri = bRange.value,
-		con = cRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(" + this.value + "%) contrast(" + con + "%) opacity(" + opa + "%)";
-	document.getElementById("sPointSize").value = this.value + "٪";
+    const bri = bRange.value;
+    const con = cRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(${this.value}%) contrast(${con}%) opacity(${opa}%)`;
+    document.getElementById("sPointSize").value = `${this.value}٪`;
 }, false);
 
 cRange.addEventListener("input", function () {
-	var bri = bRange.value,
-		sat = sRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(" + sat + "%) contrast(" + this.value + "%) opacity(" + opa + "%)";
-	document.getElementById("cPointSize").value = this.value + "٪";
+    const bri = bRange.value;
+    const sat = sRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(${sat}%) contrast(${this.value}%) opacity(${opa}%)`;
+    document.getElementById("cPointSize").value = `${this.value}٪`;
 }, false);
 
 oRange.addEventListener("input", function () {
-	var bri = bRange.value,
-		sat = sRange.value,
-		con = cRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(" + sat + "%) contrast(" + con + "%) opacity(" + this.value + "%)";
-	document.getElementById("oPointSize").value = this.value + "٪";
+    const bri = bRange.value;
+    const sat = sRange.value;
+    const con = cRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(${sat}%) contrast(${con}%) opacity(${this.value}%)`;
+    document.getElementById("oPointSize").value = `${this.value}٪`;
 }, false);
 
 zRange.addEventListener("input", function () {
-	p.style.transform = "scale3d(" + this.value + "," + this.value + "," + this.value + ")";
-	document.getElementById("zPointSize").value = this.value + "×";
+	p.style.transform = `scale3d(${this.value},${this.value},${this.value})`;
+	document.getElementById("zPointSize").value = `${this.value}×`;
 }, false);
 
 //Reset
 
 function resetB() {
-	var sat = sRange.value,
-		con = cRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(100%) saturate(" + sat + "%) contrast(" + con + "%) opacity(" + opa + "%)";
-	document.getElementById("b").value = 100;
-	document.getElementById("bPointSize").value = 100 + "٪";
-};
+    const sat = sRange.value;
+    const con = cRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(100%) saturate(${sat}%) contrast(${con}%) opacity(${opa}%)`;
+    document.getElementById("b").value = 100;
+    document.getElementById("bPointSize").value = `${100}٪`;
+}
 
 function resetS() {
-	var bri = bRange.value,
-		con = cRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(100%) contrast(" + con + "%) opacity(" + opa + "%)";
-	document.getElementById("s").value = 100;
-	document.getElementById("sPointSize").value = 100 + "٪";
-};
+    const bri = bRange.value;
+    const con = cRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(100%) contrast(${con}%) opacity(${opa}%)`;
+    document.getElementById("s").value = 100;
+    document.getElementById("sPointSize").value = `${100}٪`;
+}
 
 function resetC() {
-	var bri = bRange.value,
-		sat = sRange.value,
-		opa = oRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(" + sat + "%) contrast(100%) opacity(" + opa + "%)";
-	document.getElementById("c").value = 100;
-	document.getElementById("cPointSize").value = 100 + "٪";
-};
+    const bri = bRange.value;
+    const sat = sRange.value;
+    const opa = oRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(${sat}%) contrast(100%) opacity(${opa}%)`;
+    document.getElementById("c").value = 100;
+    document.getElementById("cPointSize").value = `${100}٪`;
+}
 
 function resetO() {
-	var bri = bRange.value,
-		sat = sRange.value,
-		con = cRange.value;
-	p.style.filter = "brightness(" + bri + "%) saturate(" + sat + "%) contrast(" + con + "%) opacity(100%)";
-	document.getElementById("o").value = 100;
-	document.getElementById("oPointSize").value = 100 + "٪";
-};
+    const bri = bRange.value;
+    const sat = sRange.value;
+    const con = cRange.value;
+    p.style.filter = `brightness(${bri}%) saturate(${sat}%) contrast(${con}%) opacity(100%)`;
+    document.getElementById("o").value = 100;
+    document.getElementById("oPointSize").value = `${100}٪`;
+}
 
 function resetZ() {
 	p.style.transform = "scale3d(1,1,1)";
 	document.getElementById("z").value = 1;
-	document.getElementById("zPointSize").value = 1 + "×";
-};
+	document.getElementById("zPointSize").value = `${1}×`;
+}
 
 //Toggle grid
 function toggleGrid() {
-	var e = document.getElementById("grid");
+	const e = document.getElementById("grid");
 	e.classList.toggle("hidden");
 }
